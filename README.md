@@ -1,4 +1,4 @@
-# react-draggin-chart
+# react-draggin-charts
 
 I didn't see any charting libraries out there that made it easy to just drag around some X-Y coordinates so here you go!
 
