@@ -2,7 +2,9 @@
 
 I didn't see any charting libraries out there that made it easy to just drag around some X-Y coordinates so here you go!
 
-Made by extending the react-vis project.
+Built on top of the react-vis project.
+
+[![NPM][nodei-image]][nodei-url]
 
 ## See it live!
 
@@ -15,3 +17,6 @@ Made by extending the react-vis project.
 <a href="https://codesandbox.io/s/qxz2wx28kj">
   <img alt="Edit react-draggin-charts" src="https://codesandbox.io/static/img/play-codesandbox.svg">
 </a>
+
+[nodei-image]: https://nodei.co/npm/react-draggin-charts.png?downloads=true&downloadRank=true&stars=true
+[nodei-url]: https://www.npmjs.com/package/react-draggin-charts
