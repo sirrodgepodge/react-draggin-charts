@@ -13,6 +13,8 @@ import LineMarkSeries from "./libMod/LineMarkSeries";
 import MarkSeries from "./libMod/MarkSeries";
 import updateCoords from "./updateCoords";
 
+import './style.css';
+
 const defaultsObj = {
   pointStyle: {
     fill: "lightblue",
