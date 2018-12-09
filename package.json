@@ -2,7 +2,7 @@
   "name": "react-draggin-charts",
   "author": "Roger Beaman <rwcbeaman@gmail.com> (https://github.com/sirrodgepodge)",
   "description": "a simply draggable react chart",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/sirrodgepodge/react-draggin-charts/issues"
   },
-  "homepage": "https://github.com/sirrodgepodge/react-draggin-charts",
+  "homepage": "https://github.com/sirrodgepodge/react-draggin-charts#readme",
   "keywords": [
     "draggable",
     "chart",
