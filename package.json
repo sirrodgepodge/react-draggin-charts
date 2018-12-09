@@ -1,6 +1,6 @@
 {
   "name": "react-draggin-chart",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "a simply draggable react chart",
   "main": "dist/index.js",
   "scripts": {

@@ -1,20 +1,19 @@
 import React, { PureComponent } from "react";
 import ReactDOM from "react-dom";
 import DragginChart from "react-draggin-chart";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import cx from "classnames";
 
 import "./style.scss";
-import "react-draggin-chart/style.css";
-
-const NUMBER_OF_POINTS = 210; // increase for more points
-const WAVINESS_FACTOR = 12.5; // increase for more curve
+import "react-draggin-chart/dist/index.css";
 
 const MIN_X = -0.5;
 const MAX_X = 0.5;
 const MIN_Y = -1.1;
 const MAX_Y = 1.1;
-const JSON_CONTAINER_WIDTH = 275;
+
+const NUMBER_OF_POINTS = 210; // increase for more points
+const WAVINESS_FACTOR = 12.5; // increase for more curve
 
 class App extends PureComponent {
   state = {
@@ -42,21 +41,10 @@ class App extends PureComponent {
         <div className="app-title-container">
           <h1 className="app-title">React Draggin Charts</h1>
         </div>
-        <pre
-          className="json-container"
-          style={{
-            width: JSON_CONTAINER_WIDTH
-          }}
-        >
+        <pre className="json-container">
           {JSON.stringify(coords, undefined, 2)}
         </pre>
-        <div
-          className="chart-container"
-          style={{
-            left: JSON_CONTAINER_WIDTH + 40,
-            width: `calc(100% - ${JSON_CONTAINER_WIDTH + 65}px)`
-          }}
-        >
+        <div className="chart-container">
           <DragginChart
             onPointDrag={onPointDrag}
             data={coords}
@@ -64,14 +52,14 @@ class App extends PureComponent {
             formatY={formatAsPercentage}
             xDomain={[MIN_X, MAX_X]}
             yDomain={[MIN_Y, MAX_Y]}
-            activePointSize={9}
-            pointSize={7}
+            activePointSize={6.5}
+            pointSize={4.5}
             lineStyle={{
-              strokeWidth: 3,
+              strokeWidth: 1.5,
               stroke: "#8085d1"
             }}
             pointStyle={{
-              strokeWidth: 4,
+              strokeWidth: 2.5,
               stroke: "294a62",
               fill: "#dc66ad"
             }}
@@ -88,15 +76,13 @@ function formatAsPercentage(v) {
 
 HoverComponent.propTypes = {
   isDragging: PropTypes.bool.isRequired,
-  dataPoint: PropTypes.object.isRequired,
+  dataPoint: PropTypes.object.isRequired
 };
 
 function HoverComponent({ isDragging, dataPoint: { id, x, y } }) {
   return (
     <div className={cx("point-description", { isDragging })}>
-      <h4 className="point-description-header">
-        {`ID: ${id}`}
-      </h4>
+      <h4 className="point-description-header">{`ID: ${id}`}</h4>
       <span className="point-description-content">
         {`the X value for this point is ${Math.round(x * 10000) / 100}%`}
         <br />
@@ -121,7 +107,7 @@ ReactDOM.render(
 function getWavyPointsArr(numberOfPoints, wavynessMultiplier) {
   const arr = new Array(numberOfPoints);
   for (let i = 0; i < numberOfPoints; i++) {
-    arr[i] = i % 2 === 0 ? 0 : Math.sin(i * wavynessMultiplier / (numberOfPoints - 2));
+    arr[i] = i % 2 === 0 ? 0 : Math.sin((i * wavynessMultiplier) / (numberOfPoints - 2));
   }
   return arr;
 }
