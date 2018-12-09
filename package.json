@@ -1,0 +1,59 @@
+{
+  "name": "react-draggin-chart",
+  "version": "0.0.27",
+  "description": "a simply draggable react chart",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "parcel build ./src/index.js",
+    "prepublish": "npm run build"
+  },
+  "keywords": [
+    "draggable",
+    "chart",
+    "draggin",
+    "charts",
+    "charting",
+    "javascript",
+    "front",
+    "end"
+  ],
+  "author": "sirRodgePodge",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
+    "react-vis": "^1.11.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/plugin-proposal-class-properties": "7.1.0",
+    "@babel/plugin-proposal-decorators": "^7.2.0",
+    "@babel/plugin-proposal-do-expressions": "^7.2.0",
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
+    "@babel/plugin-proposal-function-bind": "^7.2.0",
+    "@babel/plugin-proposal-function-sent": "^7.2.0",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.2.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.2.0",
+    "@babel/plugin-proposal-numeric-separator": "^7.2.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.2.0",
+    "@babel/plugin-proposal-pipeline-operator": "^7.2.0",
+    "@babel/plugin-proposal-throw-expressions": "^7.2.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-syntax-import-meta": "^7.2.0",
+    "@babel/plugin-transform-modules-commonjs": "7.1.0",
+    "@babel/preset-react": "7.0.0",
+    "@babel/preset-stage-0": "7.0.0",
+    "babel-eslint": "9.0.0",
+    "babel-plugin-lodash": "^3.3.4",
+    "babel-plugin-transform-react-remove-prop-types": "0.4.20",
+    "eslint": "5.6.0",
+    "eslint-config-airbnb": "17.1.0",
+    "eslint-plugin-babel": "5.3.0",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-jsx-a11y": "6.1.2",
+    "eslint-plugin-react": "7.11.1",
+    "parcel-bundler": "^1.10.3"
+  }
+}
