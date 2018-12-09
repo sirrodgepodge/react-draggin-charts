@@ -22,7 +22,7 @@ Click image to see live
 ## Check out this nifty multi-chart example live!
 
 Click image to see live
-<a href="https://codesandbox.io/s/k3qjk8o5q5">
+<a href="https://k3qjk8o5q5.codesandbox.io/">
   <img alt="react-draggin-charts multi-chart demo picture" src="https://user-images.githubusercontent.com/7177292/49703713-7dfb6280-fbd6-11e8-8cbe-1cca9bdfb8b4.jpg">
 </a>
 
