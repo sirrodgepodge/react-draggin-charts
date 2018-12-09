@@ -169,8 +169,8 @@ export default class DragginChart extends PureComponent {
   render() {
     const {
       data,
-      hoverComponent,
-      noDataComponent,
+      hoverComponent: HoverComponent,
+      noDataComponent: NoDataComponent,
       noDataText,
       formatX,
       formatY,
@@ -259,9 +259,9 @@ export default class DragginChart extends PureComponent {
           )}
           {noActiveDataPoint
             ? null
-            : hoverComponent && (
+            : HoverComponent && (
               <Hint value={activeDataPoint}>
-                {hoverComponent({ isDragging, dataPoint: activeDataPoint })}
+                <HoverComponent isDragging={isDragging} dataPoint={activeDataPoint} />
               </Hint>
             )}
           {!noData ? null : (
@@ -271,10 +271,10 @@ export default class DragginChart extends PureComponent {
                 y: (minY + maxY) / 2
               }}
             >
-              {(typeof noDataText != null || noDataComponent) && (
+              {(typeof noDataText != null || NoDataComponent) && (
                 <div className="no-data-description">
-                  {noDataComponent ? (
-                    noDataComponent()
+                  {NoDataComponent ? (
+                    <NoDataComponent />
                   ) : (
                     <h3 style={{ fontFamily: "sans-serif" }}>{noDataText}</h3>
                   )}

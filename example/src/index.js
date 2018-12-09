@@ -70,8 +70,28 @@ class App extends PureComponent {
   }
 }
 
+const rootElement = document.getElementById("root");
+ReactDOM.render(
+  <>
+    <link
+      href="https://fonts.googleapis.com/css?family=Damion"
+      rel="stylesheet"
+    />
+    <App />
+  </>,
+  rootElement
+);
+
 function formatAsPercentage(v) {
   return `${Math.round(v * 100)}%`;
+}
+
+function getWavyPointsArr(numberOfPoints, wavynessMultiplier) {
+  const arr = new Array(numberOfPoints);
+  for (let i = 0; i < numberOfPoints; i++) {
+    arr[i] = i % 2 === 0 ? 0 : Math.sin((i * wavynessMultiplier) / (numberOfPoints - 2));
+  }
+  return arr;
 }
 
 HoverComponent.propTypes = {
@@ -90,24 +110,4 @@ function HoverComponent({ isDragging, dataPoint: { id, x, y } }) {
       </span>
     </div>
   );
-}
-
-const rootElement = document.getElementById("root");
-ReactDOM.render(
-  <>
-    <link
-      href="https://fonts.googleapis.com/css?family=Damion"
-      rel="stylesheet"
-    />
-    <App />
-  </>,
-  rootElement
-);
-
-function getWavyPointsArr(numberOfPoints, wavynessMultiplier) {
-  const arr = new Array(numberOfPoints);
-  for (let i = 0; i < numberOfPoints; i++) {
-    arr[i] = i % 2 === 0 ? 0 : Math.sin((i * wavynessMultiplier) / (numberOfPoints - 2));
-  }
-  return arr;
 }
