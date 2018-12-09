@@ -26,7 +26,7 @@ Click image to see live
   <img alt="react-draggin-charts multi-chart demo picture" src="https://user-images.githubusercontent.com/7177292/49703713-7dfb6280-fbd6-11e8-8cbe-1cca9bdfb8b4.jpg">
 </a>
 
-## Edit a multi-chart example real time!
+## Edit the above multi-chart example real time!
 
 <a href="https://codesandbox.io/s/k3qjk8o5q5">
   <img alt="Edit react-draggin-charts-multichart-example" src="https://codesandbox.io/static/img/play-codesandbox.svg">
