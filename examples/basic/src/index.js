@@ -1,24 +1,40 @@
 import React, { PureComponent } from "react";
 import ReactDOM from "react-dom";
-import DragginChart from "react-draggin-chart";
+import DragginChart from "react-draggin-charts";
 import PropTypes from "prop-types";
 import cx from "classnames";
 
 import "./style.scss";
-import "react-draggin-chart/dist/index.css";
+import "react-draggin-charts/dist/index.css";
 
 const MIN_X = -0.5;
 const MAX_X = 0.5;
 const MIN_Y = -1.1;
 const MAX_Y = 1.1;
+const xDomain = [MIN_X, MAX_X];
+const yDomain = [MIN_Y, MAX_Y];
 
-const NUMBER_OF_POINTS = 210; // increase for more points
+const NUMBER_OF_POINTS = 209; // increase for more points
 const WAVINESS_FACTOR = 12.5; // increase for more curve
+
+const SCREEN_IS_SMALL = window.innerHeight < 600 && window.innerWidth < 900;
+const activePointSize = SCREEN_IS_SMALL ? 6.5 : 9;
+const pointSize = SCREEN_IS_SMALL ? 4.5 : 7;
+const lineStyle = {
+  strokeWidth: SCREEN_IS_SMALL ? 1.5 : 3.25,
+  stroke: "#8085d1"
+};
+const pointStyle = {
+  strokeWidth: SCREEN_IS_SMALL ? 2.5 : 4,
+  stroke: "294a62",
+  fill: "#dc66ad"
+};
 
 class App extends PureComponent {
   state = {
     coords: getWavyPointsArr(NUMBER_OF_POINTS, WAVINESS_FACTOR).map((y, i) => {
-      const percentAroundZero = (i - NUMBER_OF_POINTS / 2) / NUMBER_OF_POINTS;
+      const adjNumberOfPoints = NUMBER_OF_POINTS - 1;
+      const percentAroundZero = (i - adjNumberOfPoints / 2) / adjNumberOfPoints;
       return {
         x: percentAroundZero,
         y,
@@ -41,30 +57,23 @@ class App extends PureComponent {
         <div className="app-title-container">
           <h1 className="app-title">React Draggin Charts</h1>
         </div>
-        <pre className="json-container">
-          {JSON.stringify(coords, undefined, 2)}
-        </pre>
         <div className="chart-container">
           <DragginChart
             onPointDrag={onPointDrag}
             data={coords}
             hoverComponent={HoverComponent}
             formatY={formatAsPercentage}
-            xDomain={[MIN_X, MAX_X]}
-            yDomain={[MIN_Y, MAX_Y]}
-            activePointSize={6.5}
-            pointSize={4.5}
-            lineStyle={{
-              strokeWidth: 1.5,
-              stroke: "#8085d1"
-            }}
-            pointStyle={{
-              strokeWidth: 2.5,
-              stroke: "294a62",
-              fill: "#dc66ad"
-            }}
+            xDomain={xDomain}
+            yDomain={yDomain}
+            activePointSize={activePointSize}
+            pointSize={pointSize}
+            lineStyle={lineStyle}
+            pointStyle={pointStyle}
           />
         </div>
+        <pre className="json-container">
+          {JSON.stringify(coords, undefined, 2)}
+        </pre>
       </div>
     );
   }
@@ -89,7 +98,13 @@ function formatAsPercentage(v) {
 function getWavyPointsArr(numberOfPoints, wavynessMultiplier) {
   const arr = new Array(numberOfPoints);
   for (let i = 0; i < numberOfPoints; i++) {
-    arr[i] = i % 2 === 0 ? 0 : Math.sin((i * wavynessMultiplier) / (numberOfPoints - 2));
+    arr[i] =
+      i % 2 === 0
+        ? 0
+        : Math.sin(
+          (i * wavynessMultiplier) /
+              (numberOfPoints - (numberOfPoints % 2 === 0 ? 0 : 2))
+        );
   }
   return arr;
 }

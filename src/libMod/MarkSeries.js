@@ -9,13 +9,10 @@ import { warning } from "react-vis/dist/utils/react-utils";
 import { DEFAULT_SIZE, DEFAULT_OPACITY } from "react-vis/dist/theme";
 
 import AbstractSeries from "react-vis/dist/plot/series/abstract-series";
+import { passiveCaptureEventObj } from '../utils';
 
 const predefinedClassName = "rv-xy-plot__series rv-xy-plot__series--mark";
 const DEFAULT_STROKE_WIDTH = 1;
-const eventObj = {
-  capture: true,
-  passive: true,
-};
 
 function getAdjToZeroVal(low) {
   let adjVal = 0;
@@ -160,17 +157,17 @@ export default class MarkSeries extends AbstractSeries {
   };
 
   componentDidMount() {
-    document.addEventListener("mousemove", this.handleMouseMove, eventObj);
-    document.addEventListener("mouseup", this.handleMouseUp, eventObj);
-    window.addEventListener("resize", this.updateOffsetCoords, eventObj);
-    window.addEventListener("scroll", this.updateOffsetCoords, eventObj);
+    document.addEventListener("mousemove", this.handleMouseMove, passiveCaptureEventObj);
+    document.addEventListener("mouseup", this.handleMouseUp, passiveCaptureEventObj);
+    window.addEventListener("resize", this.updateOffsetCoords, passiveCaptureEventObj);
+    window.addEventListener("scroll", this.updateOffsetCoords, passiveCaptureEventObj);
   }
 
   componentWillUnmount() {
-    document.removeEventListener("mousemove", this.handleMouseMove, eventObj);
-    document.removeEventListener("mouseup", this.handleMouseUp, eventObj);
-    window.removeEventListener("resize", this.updateOffsetCoords, eventObj);
-    window.removeEventListener("scroll", this.updateOffsetCoords, eventObj);
+    document.removeEventListener("mousemove", this.handleMouseMove, passiveCaptureEventObj);
+    document.removeEventListener("mouseup", this.handleMouseUp, passiveCaptureEventObj);
+    window.removeEventListener("resize", this.updateOffsetCoords, passiveCaptureEventObj);
+    window.removeEventListener("scroll", this.updateOffsetCoords, passiveCaptureEventObj);
   }
 
   componentDidUpdate(prevProps) {

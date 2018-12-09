@@ -10,3 +10,8 @@ export function getInterceptFromPoints({ x: x1, y: y1 }, { x: x2, y: y2 }) {
 export function getInterceptFromSlopeAndPoint(slope, { x, y }) {
   return y - slope * x;
 }
+
+export const passiveCaptureEventObj = {
+  capture: true,
+  passive: true,
+};

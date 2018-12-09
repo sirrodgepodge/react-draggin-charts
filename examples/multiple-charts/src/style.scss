@@ -2,42 +2,34 @@ $text-and-grid: #fff;
 $json-container-width: 275px;
 
 .chart-container {
-  position: absolute;
-  left: $json-container-width + 40px;
-  width: calc(100% - #{$json-container-width + 65});
-  height: calc(100% - 122px);
+  display: inline-block;
+  position: relative;
+  margin: 0 9px 18px 9px;
+  width: calc(33.333333333% - 18px);
+  height: calc(50% - 68px);
 }
 
-.json-container {
-  width: $json-container-width;
-  font-family: inherit;
-  font-size: 14px;
+.all-charts-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 0 9px;
   box-sizing: border-box;
-  position: absolute;
-  left: 20px;
-  user-select: none;
-  text-align: left;
-  background-color: #294a62;
-  border: 3px solid #8085d1;
-  border-radius: 8px;
-  box-shadow: 4px 4px 18px -1px rgba(0, 0, 0, 0.6);
-  padding: 15px;
-  white-space: pre-wrap;
-  margin: 0;
 }
 
-@media (max-width: 750px) {
-  .chart-container {
-    left: 20px;
+@media (max-width: 900px) {
+  .all-charts-wrapper {
+    flex-direction: row;
   }
 
-  .json-container,
   .chart-container {
-    width: calc(100% - 40px);
+    width: calc(50% - 18px);
   }
+}
 
-  .json-container {
-    top: 100%;
+@media (max-width: 475px) {
+  .chart-container {
+    width: calc(100% - 18px);
   }
 }
 
@@ -47,15 +39,25 @@ body {
   margin: 0;
 }
 
+html,
+body,
+#root,
+.App,
+.all-charts-wrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
 .app-title-container {
   text-align: center;
-  margin-bottom: 18px;
-  height: 68px;
+  min-height: 76px;
+  margin-bottom: 10px;
+  margin-top: 12px;
 }
 
 .app-title {
-  margin-bottom: 10px;
-  margin-top: 12px;
+  margin: 0;
   font-weight: 100;
   font-size: 50px;
 }

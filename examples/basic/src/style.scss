@@ -1,0 +1,115 @@
+$text-and-grid: #fff;
+$json-container-width: 275px;
+
+.chart-container {
+  position: absolute;
+  margin: 0 20px 24px 20px;
+  left: $json-container-width + 20px;
+  width: calc(100% - #{$json-container-width + 65});
+  height: calc(100% - 122px);
+}
+
+.json-container {
+  width: $json-container-width;
+  font-family: inherit;
+  font-size: 14px;
+  box-sizing: border-box;
+  position: absolute;
+  user-select: none;
+  text-align: left;
+  background-color: #294a62;
+  border: 3px solid #8085d1;
+  border-radius: 8px;
+  box-shadow: 4px 4px 18px -1px rgba(0, 0, 0, 0.6);
+  padding: 15px;
+  white-space: pre-wrap;
+  margin: 0 0 0 20px;
+}
+
+@media (max-width: 750px) {
+  .chart-container {
+    position: relative;
+    left: 0px;
+    width: calc(100% - 46px);
+  }
+
+  .json-container {
+    position: relative;
+    width: calc(100% - 40px);
+  }
+}
+
+body {
+  background-color: #283d5a;
+  font-family: Damion, sans-serif;
+  margin: 0;
+}
+
+html,
+body,
+#root,
+.App {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.app-title-container {
+  text-align: center;
+  min-height: 76px;
+  margin-bottom: 10px;
+  margin-top: 12px;
+}
+
+.app-title {
+  margin: 0;
+  font-weight: 100;
+  font-size: 50px;
+}
+
+.rv-xy-plot,
+.app-title,
+.json-container,
+.point-description,
+.rv-xy-plot__axis__tick__line {
+  color: $text-and-grid !important;
+}
+
+.rv-xy-plot__axis__line,
+.rv-xy-plot__axis__tick__line {
+  stroke: $text-and-grid !important;
+}
+
+.rv-xy-plot__inner {
+  border: 3px solid #8085d1;
+  border-radius: 8px;
+  background-color: #294a62;
+  box-shadow: 4px 4px 18px -1px rgba(0, 0, 0, 0.6);
+}
+
+.rv-xy-plot__axis__tick__text {
+  fill: $text-and-grid !important;
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 1), 0px 0px 10px rgba(0, 0, 0, 1),
+    0px 0px 10px rgba(0, 0, 0, 1);
+}
+
+point-description-header {
+  margin-bottom: 12px;
+}
+
+.point-description-content {
+  font-size: 14px;
+}
+
+.point-description {
+  font-family: inherit;
+  background-color: #508191;
+  border-radius: 8px;
+  padding: 1px 15px 22px;
+  box-shadow: 4px 4px 18px -1px rgba(0, 0, 0, 0.6);
+  transition: opacity 0.15s ease-in-out;
+}
+
+.point-description.isDragging {
+  opacity: 0.7;
+}

@@ -12,6 +12,7 @@ import YAxis from "react-vis/dist/plot/axis/y-axis";
 import LineMarkSeries from "./libMod/LineMarkSeries";
 import MarkSeries from "./libMod/MarkSeries";
 import updateCoords from "./updateCoords";
+import { passiveCaptureEventObj } from "./utils";
 
 import './style.css';
 
@@ -61,14 +62,15 @@ export default class DragginChart extends PureComponent {
     super(props);
 
     this.state = {
-      activeIndex: null,
-      isDragging: false
+      activeIndex: -1,
+      isDragging: false,
+      hidingActiveDataPoint: false,
     };
     this.updateIndexCache();
     this.updateDomain();
 
     if (process.env.NODE_ENV !== 'production') {
-      this.componentDidMount = () => {
+      this.__componentDidMount = () => {
         const { data = [] } = this.props;
         if (data) {
           const dataLength = data.length;
@@ -79,6 +81,31 @@ export default class DragginChart extends PureComponent {
           }
         }
       };
+    }
+  }
+
+  componentDidMount() {
+    if (process.env.NODE_ENV !== 'production') {
+      this.__componentDidMount();
+    }
+
+    window.addEventListener('mousedown', this.handleMouseDown, passiveCaptureEventObj);
+    window.addEventListener('mouseup', this.handleMouseUp, passiveCaptureEventObj);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('mousedown', this.handleMouseDown, passiveCaptureEventObj);
+    window.removeEventListener('mouseup', this.handleMouseUp, passiveCaptureEventObj);
+  }
+
+  mouseIsDown = false;
+  handleMouseDown = () => {
+    this.mouseIsDown = true;
+  }
+  handleMouseUp = () => {
+    this.mouseIsDown = false;
+    if (this.state.hidingActiveDataPoint) {
+      this.setState({ hidingActiveDataPoint: false });
     }
   }
 
@@ -142,7 +169,9 @@ export default class DragginChart extends PureComponent {
   }
 
   onValueDragStart = () => this.setState({ isDragging: true });
-  onValueDragEnd = () => this.setState({ isDragging: false });
+  onValueDragEnd = () => !this.mouseIsInside ?
+    this.setState({ isDragging: false, activeIndex: -1 }) :
+    this.setState({ isDragging: false })
   onValueDrag = (oldVal, { chartCoords }) => {
     const { data, onPointDrag } = this.props;
 
@@ -158,13 +187,25 @@ export default class DragginChart extends PureComponent {
     );
   };
 
-  highlightPoint = pt =>
-    !this.state.isDragging
-    && this.setState({ activeIndex: this.indexCache.get(pt) });
-  unhighlightPoints = () =>
-    !this.state.isDragging
-    && this.state.activeIndex !== null
-    && this.setState({ activeIndex: null });
+  mouseIsInside = false;
+  setMouseInside = () => {
+    this.mouseIsInside = true;
+  }
+  highlightPoint = pt => {
+    if (!this.state.isDragging) {
+      if (this.mouseIsDown) {
+        this.setState({ activeIndex: this.indexCache.get(pt), hidingActiveDataPoint: true });
+      } else {
+        this.setState({ activeIndex: this.indexCache.get(pt) });
+      }
+    }
+  }
+  unhighlightPoints = () => {
+    this.mouseIsInside = false;
+    if (!this.state.isDragging && this.state.activeIndex !== -1) {
+      this.setState({ activeIndex: -1 });
+    }
+  }
 
   render() {
     const {
@@ -190,7 +231,7 @@ export default class DragginChart extends PureComponent {
       this.updateDomain();
     }
 
-    const { activeIndex, isDragging } = this.state;
+    const { hidingActiveDataPoint, activeIndex, isDragging } = this.state;
 
     const {
       xDomain,
@@ -198,6 +239,7 @@ export default class DragginChart extends PureComponent {
       onValueDragStart,
       onValueDragEnd,
       onValueDrag,
+      setMouseInside,
       highlightPoint,
       unhighlightPoints
     } = this;
@@ -226,6 +268,7 @@ export default class DragginChart extends PureComponent {
         <FlexibleXYPlot
           animation
           dontCheckIfEmpty
+          onMouseEnter={setMouseInside}
           onMouseLeave={unhighlightPoints}
           xDomain={xDomain}
           yDomain={yDomain}
@@ -246,7 +289,7 @@ export default class DragginChart extends PureComponent {
               animation={false}
             />
           )}
-          {noData || noActiveDataPoint ? null : (
+          {noData || noActiveDataPoint || hidingActiveDataPoint ? null : (
             <MarkSeries
               data={[activeDataPoint]}
               onValueDragStart={onValueDragStart}
@@ -257,7 +300,7 @@ export default class DragginChart extends PureComponent {
               animation={false}
             />
           )}
-          {noActiveDataPoint
+          {noActiveDataPoint || hidingActiveDataPoint
             ? null
             : HoverComponent && (
               <Hint value={activeDataPoint}>

@@ -12,7 +12,6 @@
     "ecmaVersion": 2018
   },
   "rules": {
-    "no-confusing-arrow": "off",
     "operator-linebreak": "off",
     "no-console": "off",
     "strict": ["error", "global"],

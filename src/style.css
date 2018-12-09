@@ -2,6 +2,7 @@
   position: relative;
   width: 100%;
   height: 100%;
+  -webkit-user-drag: none; /* get rid of chrome image drag behavior */
 }
 
 .no-data-description {
@@ -21,6 +22,7 @@
 
 .rv-xy-plot__inner {
   display: block;
+  box-sizing: border-box;
 }
 
 .rv-xy-plot__axis__line {
