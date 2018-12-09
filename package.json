@@ -1,12 +1,17 @@
 {
   "name": "react-draggin-charts",
-  "version": "0.1.6",
+  "author": "Roger Beaman <rwcbeaman@gmail.com> (https://github.com/sirrodgepodge)",
   "description": "a simply draggable react chart",
-  "main": "dist/index.js",
-  "scripts": {
-    "build": "parcel build ./src/index.js",
-    "prepublish": "npm run build"
+  "version": "0.1.7",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sirrodgepodge/react-draggin-charts.git"
   },
+  "bugs": {
+    "url": "https://github.com/sirrodgepodge/react-draggin-charts/issues"
+  },
+  "homepage": "https://github.com/sirrodgepodge/react-draggin-charts",
   "keywords": [
     "draggable",
     "chart",
@@ -17,8 +22,11 @@
     "front",
     "end"
   ],
-  "author": "sirRodgePodge",
-  "license": "MIT",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "parcel build ./src/index.js",
+    "prepublish": "npm run build"
+  },
   "dependencies": {
     "lodash": "^4.17.11",
     "prop-types": "^15.6.2",
