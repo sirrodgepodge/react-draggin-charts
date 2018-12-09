@@ -121,7 +121,7 @@ ReactDOM.render(
 function getWavyPointsArr(numberOfPoints, wavynessMultiplier) {
   const arr = new Array(numberOfPoints);
   for (let i = 0; i < numberOfPoints; i++) {
-    arr[i] = i % 2 === 0 ? 0 : -Math.sin(i * wavynessMultiplier / (numberOfPoints - 2));
+    arr[i] = i % 2 === 0 ? 0 : Math.sin(i * wavynessMultiplier / (numberOfPoints - 2));
   }
   return arr;
 }
